@@ -42,8 +42,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         initQuiz();
 
         final Button endQuizBtn = findViewById(R.id.endQuizBtn);
-        Intent Result = new Intent(this, ResultActivity.class);
-
         endQuizBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
