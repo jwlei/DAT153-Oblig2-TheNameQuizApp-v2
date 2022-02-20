@@ -12,6 +12,8 @@
         <activity
             android:name=".DatabaseActivity"
             android:exported="false" />
+        <activity android:name=".ResultActivity"/>
+        <activity android:name=".QuizActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

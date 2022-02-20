@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Database {
@@ -13,18 +14,22 @@ public class Database {
     Uri Cleopatra = Uri.parse("android.resource://no.hvl.dat153/drawable/foxxycleopatra");
 
     private List<Person> people;
+    private List<String> listOfNames = new ArrayList<>();
 
     private static Database instance = null;
 
 
+
     private Database() {
-        people = new ArrayList<>();
-        people.add(new Person("Finn Arne",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
-        people.add(new Person("Per Otto",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)));
-        people.add(new Person("Per Helge",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)));
+        people = new ArrayList<>(Arrays.asList(
+                new Person("Finn Arne",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)),
+                new Person("Per Otto",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)),
+                new Person("Per Helge",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge))
+        ));
+
 
     }
 
@@ -51,5 +56,13 @@ public class Database {
 
     public Person get(int position) {
         return people.get(position);
+    }
+
+    public List<String> getNames() {
+        Iterator<Person> iterator = people.iterator();
+        while(iterator.hasNext()) {
+            listOfNames.add(iterator.next().getName());
+        }
+        return listOfNames;
     }
 }
