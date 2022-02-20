@@ -21,10 +21,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private String ans;
     private int score;
     private int attempts;
+    private boolean quizRunning = false;
 
     private RadioButton radioButton;
     private List<Person> person;
     private List<String> listOfNames;
+
 
 
 
@@ -41,13 +43,18 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         final Button endQuizBtn = findViewById(R.id.endQuizBtn);
         Intent Result = new Intent(this, ResultActivity.class);
-        endQuizBtn.setOnClickListener(v -> startActivity(Result));
+
+        endQuizBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quizRunning = true;
+                initQuiz();
+            }
+        });
     }
 
     private void initQuiz() {
         Random rand = new Random();
-        boolean quizRunning = false;
-
 
         if (quizRunning) {
             Intent result = new Intent(this, ResultActivity.class);

@@ -15,14 +15,14 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         String score = "";
-        String total = "";
+        String attempts = "";
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             score = extras.getString("score");
-            total = extras.getString("total");
+            attempts = extras.getString("attempts");
         }
-        String display = score + " points after " + total + " questions!";
+        String display = score + " points after " + attempts + " questions!";
         TextView textView = findViewById(R.id.showResult);
         textView.setText(display);
 
