@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -24,11 +25,13 @@ public class DatabaseActivity extends AppCompatActivity {
 
         Database database = Database.getInstance();
 
-        database.getPeople().add(new Person("Finn Arne"));
-        database.getPeople().add(new Person("Per Otto"));
-        database.getPeople().add(new Person("Joakim"));
-        database.getPeople().add(new Person("Roger"));
-        database.getPeople().add(new Person("Ronni Jonni"));
+
+        database.getPeople().add(new Person("Finn Arne",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+        database.getPeople().add(new Person("Per Otto",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)));
+        database.getPeople().add(new Person("Per Helge",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)));
 
         sort = findViewById(R.id.buttonSort);
         addEntry = findViewById(R.id.buttonAddEntry);

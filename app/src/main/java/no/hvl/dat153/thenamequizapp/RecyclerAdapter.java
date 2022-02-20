@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         holder.getTextviewPerson().setText(database.get(position).getName());
+        holder.getImageView().setImageURI(database.get(position).getImage());
     }
 
     @Override
@@ -41,15 +43,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
         // provide a reference to the view that's used
         private final TextView textviewPerson;
+        private final ImageView imageView;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
+            imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
+
         }
 
         public TextView getTextviewPerson() {
             return textviewPerson;
+        }
+
+        public ImageView getImageView() {
+            return imageView;
         }
     }
 }
