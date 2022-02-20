@@ -16,8 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import no.hvl.dat153.dao.PersonDao;
-
 public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String ans;

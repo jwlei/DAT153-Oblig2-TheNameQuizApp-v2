@@ -19,7 +19,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        quiz = findViewById(R.id.buttonQuiz);
+        //Find button
+        final Button take_quiz = findViewById(R.id.buttonQuiz);
+        //Create intent
+        Intent quiz = new Intent(this,QuizActivity.class);
+        //Set onclick
+        take_quiz.setOnClickListener(v -> startActivity(quiz));
+
+
         database = findViewById(R.id.buttonDatabase);
         addEntry = findViewById(R.id.buttonAddEntry);
 
