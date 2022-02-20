@@ -23,9 +23,9 @@
         android:text="Quiz" />
 
     <Button
-        android:id="@+id/buttonAddEntry"
+        android:id="@+id/buttonAddEntryMain"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
-        android:text="AddEntry" />
+        android:text="Add Entry" />
 </LinearLayout>

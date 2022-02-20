@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         quiz = findViewById(R.id.buttonQuiz);
         database = findViewById(R.id.buttonDatabase);
-        addEntry = findViewById(R.id.buttonAddEntry);
+        addEntry = findViewById(R.id.buttonAddEntryMain);
 
         database.setOnClickListener(new View.OnClickListener() {
             @Override

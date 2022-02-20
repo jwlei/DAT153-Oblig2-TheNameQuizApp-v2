@@ -38,4 +38,17 @@ public class Database {
     public Person get(int position) {
         return people.get(position);
     }
+
+    public boolean addPerson(String name) {
+
+        if (name != null) {
+            people.add(new Person(name, Uri.parse("android.resource://" +
+                    BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }
