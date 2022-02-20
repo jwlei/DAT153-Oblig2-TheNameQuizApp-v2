@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/facni/Documents/Skole/DAT153/Obligger/Oblig1/app/src/main/res/layout/activity_main.xml" value="0.35648148148148145" />
+        <entry key="app/src/main/res/layout/activity_database.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/person_record.xml" value="0.1" />
       </map>
     </option>
   </component>
