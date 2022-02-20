@@ -9,10 +9,6 @@ import java.util.List;
 
 public class Database {
 
-    Uri Miranda = Uri.parse("android.resource://no.hvl.dat153/drawable/miranda");
-    Uri Charlie = Uri.parse("android.resource://no.hvl.dat153/drawable/charlie");
-    Uri Cleopatra = Uri.parse("android.resource://no.hvl.dat153/drawable/foxxycleopatra");
-
     private List<Person> people;
     private List<String> listOfNames = new ArrayList<>();
 
@@ -31,14 +27,6 @@ public class Database {
         ));
 
 
-    }
-
-    public void initDatabse() {
-        getPeople().add(new Person("Finn Arne", Miranda));
-        getPeople().add(new Person("Per Otto", Charlie));
-        getPeople().add(new Person("Joakim", Miranda));
-        getPeople().add(new Person("Roger", Miranda));
-        getPeople().add(new Person("Ronni Jonni", Cleopatra));
     }
 
     public static Database getInstance() {
