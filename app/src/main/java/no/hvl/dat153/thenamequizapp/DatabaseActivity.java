@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -24,8 +24,14 @@ public class DatabaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_database);
 
         Database database = Database.getInstance();
-        database.initDatabse();
 
+
+        database.getPeople().add(new Person("Finn Arne",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+        database.getPeople().add(new Person("Per Otto",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)));
+        database.getPeople().add(new Person("Per Helge",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)));
 
         sort = findViewById(R.id.buttonSort);
         addEntry = findViewById(R.id.buttonAddEntry);
@@ -34,12 +40,5 @@ public class DatabaseActivity extends AppCompatActivity {
 
         adapter = new RecyclerAdapter(database);
         recyclerView.setAdapter(adapter);
-
-        final Button AddEntry = findViewById(R.id.buttonAddEntry);
-        Intent addNewPerson = new Intent(this, AddNewPersonActivity.class);
-
-        AddEntry.setOnClickListener(v -> startActivity(addNewPerson));
-
-
     }
 }

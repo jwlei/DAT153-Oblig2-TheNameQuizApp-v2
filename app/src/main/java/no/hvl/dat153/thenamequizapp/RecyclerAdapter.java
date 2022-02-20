@@ -1,6 +1,5 @@
 package no.hvl.dat153.thenamequizapp;
 
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         holder.getTextviewPerson().setText(database.get(position).getName());
-        holder.getImageviewPerson().setImageURI(database.get(position).getPath());
+        holder.getImageView().setImageURI(database.get(position).getImage());
     }
 
     @Override
@@ -44,21 +43,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
         // provide a reference to the view that's used
         private final TextView textviewPerson;
-        private final ImageView imageviewPerson;
+        private final ImageView imageView;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
-            imageviewPerson = (ImageView) itemView.findViewById(R.id.imageViewImage);
+            imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
 
         }
 
         public TextView getTextviewPerson() {
             return textviewPerson;
         }
-        public ImageView getImageviewPerson() {
-            return imageviewPerson;
+
+        public ImageView getImageView() {
+            return imageView;
         }
     }
 }

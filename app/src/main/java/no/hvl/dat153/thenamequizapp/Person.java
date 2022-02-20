@@ -1,59 +1,30 @@
 package no.hvl.dat153.thenamequizapp;
 
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public class Person implements Parcelable {
+public class Person {
 
     private String name;
-    private Uri path;
+    private Uri image;
 
-    public Person(String name, Uri path) {
+    public Person(String name, Uri image) {
         this.name = name;
-        this.path = path;
+        this.image = image;
     }
-
-    protected Person(Parcel in){
-        name = in.readString();
-        path = Uri.parse(in.readString());
-    }
-
-    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
-        @Override
-        public Person createFromParcel(Parcel in) {
-            return new Person(in);
-        }
-
-        @Override
-        public Person[] newArray(int size) {
-            return new Person[size];
-        }
-    };
-
-
-
 
     public String getName() {
         return name;
     }
 
+    public Uri getImage() {
+        return image;
+    }
+
+    public void setImage(Uri image) {
+        this.image = image;
+    }
+
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public Uri getPath() {
-        return path;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(String.valueOf(path));
     }
 }
