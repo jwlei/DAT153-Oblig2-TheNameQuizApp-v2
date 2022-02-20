@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         database = findViewById(R.id.buttonDatabase);
         addEntry = findViewById(R.id.buttonAddEntry);
 
+
+
+
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
