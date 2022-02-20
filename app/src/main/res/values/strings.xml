@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TheNameQuizApp</string>
+    <string name="quizPicture">profile picture</string>
+    <string name="quizBtnA">A</string>
+    <string name="quizBtnB">B</string>
+    <string name="quizBtnC">C</string>
+    <string name="SubmitAnswer">Submit answer</string>
+    <string name="endQuizBtn">End quiz</string>
+
+    <string name="score">Score:</string>
+    <string name="finalScore">finalScore</string>
+    <string name="return_to_start">Return to the start screen</string>
 </resources>

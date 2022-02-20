@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheNameQuizApp">
         <activity
+            android:name=".AddEntryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DatabaseActivity"
+            android:exported="false" />
+        <activity android:name=".ResultActivity"/>
+        <activity android:name=".QuizActivity"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
