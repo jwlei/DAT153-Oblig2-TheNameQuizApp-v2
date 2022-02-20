@@ -9,10 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button quiz;
     Button database;
-    Button addEntry;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         database = findViewById(R.id.buttonDatabase);
-        addEntry = findViewById(R.id.buttonAddEntryMain);
+
 
 
 

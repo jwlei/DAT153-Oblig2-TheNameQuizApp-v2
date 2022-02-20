@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.net.Uri;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import java.util.Comparator;
@@ -21,7 +19,8 @@ public class DatabaseActivity extends AppCompatActivity {
 
     Database database = Database.getInstance();
 
-    Button sort;
+    Button sortAZ;
+    Button sortZA;
     Button addEntry;
     Button delete;
 
@@ -36,7 +35,8 @@ public class DatabaseActivity extends AppCompatActivity {
         Database database = Database.getInstance();
 
 
-        sort = findViewById(R.id.buttonSort);
+        sortAZ = findViewById(R.id.buttonSortAZ);
+        sortZA = findViewById(R.id.buttonSortZA);
         addEntry = findViewById(R.id.buttonAddEntryDatabase);
 
 
@@ -46,12 +46,24 @@ public class DatabaseActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
-        sort.setOnClickListener(new View.OnClickListener() {
+        sortAZ.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
 
                 database.getPeople().sort(Comparator.comparing(Person::getName));
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        sortZA.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View view) {
+
+                database.getPeople().sort(Comparator.comparing(Person::getName, Comparator.reverseOrder()));
+
                 adapter.notifyDataSetChanged();
             }
         });

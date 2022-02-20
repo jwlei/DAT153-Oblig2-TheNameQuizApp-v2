@@ -19,21 +19,30 @@
 
         <Button
             android:id="@+id/buttonAddEntryDatabase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_weight="1"
             android:text="Add Entry" />
 
         <Button
-            android:id="@+id/buttonSort"
+            android:id="@+id/buttonSortAZ"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="A-Z" />
+
+        <Button
+            android:id="@+id/buttonSortZA"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_weight="1"
-            android:text="Sort" />
+            android:text="Z-A" />
     </LinearLayout>
 
 </LinearLayout>
