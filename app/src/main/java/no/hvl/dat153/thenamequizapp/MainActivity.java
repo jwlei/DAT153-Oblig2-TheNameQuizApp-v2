@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         database = findViewById(R.id.buttonDatabase);
-        addEntry = findViewById(R.id.buttonAddEntry);
+        addEntry = findViewById(R.id.buttonAddEntryMain);
 
 
 

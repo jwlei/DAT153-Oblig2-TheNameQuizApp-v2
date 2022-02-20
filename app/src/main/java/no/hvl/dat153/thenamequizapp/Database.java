@@ -14,8 +14,6 @@ public class Database {
 
     private static Database instance = null;
 
-
-
     private Database() {
         people = new ArrayList<>(Arrays.asList(
                 new Person("Finn Arne",
@@ -45,6 +43,19 @@ public class Database {
     public Person get(int position) {
         return people.get(position);
     }
+
+    public boolean addPerson(String name) {
+
+        if (name != null) {
+            people.add(new Person(name, Uri.parse("android.resource://" +
+                    BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 
     public List<String> getNames() {
         Iterator<Person> iterator = people.iterator();
