@@ -19,6 +19,13 @@ public class Database {
 
     private Database() {
         people = new ArrayList<>();
+        people.add(new Person("Finn Arne",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+        people.add(new Person("Per Otto",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)));
+        people.add(new Person("Per Helge",
+                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)));
+
     }
 
     public void initDatabse() {

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class DatabaseActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
     Button sort;
     Button addEntry;
+    Button delete;
 
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
@@ -26,19 +28,15 @@ public class DatabaseActivity extends AppCompatActivity {
         Database database = Database.getInstance();
 
 
-        database.getPeople().add(new Person("Finn Arne",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
-        database.getPeople().add(new Person("Per Otto",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)));
-        database.getPeople().add(new Person("Per Helge",
-                Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)));
-
         sort = findViewById(R.id.buttonSort);
         addEntry = findViewById(R.id.buttonAddEntry);
+
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        adapter = new RecyclerAdapter(database);
+        adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
+
     }
 }
