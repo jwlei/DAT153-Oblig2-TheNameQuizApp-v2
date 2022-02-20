@@ -51,7 +51,7 @@ public class AddEntryActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
             }
@@ -63,8 +63,10 @@ public class AddEntryActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE) {
-            imageView.setImageURI(data.getData());
+
             imageUri = data.getData();
+            getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            imageView.setImageURI(imageUri);
         }
     }
 }

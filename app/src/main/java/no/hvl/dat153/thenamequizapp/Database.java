@@ -10,7 +10,6 @@ import java.util.List;
 public class Database {
 
     private List<Person> people;
-    private List<String> listOfNames = new ArrayList<>();
 
     private static Database instance = null;
 
@@ -57,6 +56,7 @@ public class Database {
 
 
     public List<String> getNames() {
+        List<String> listOfNames = new ArrayList<>();
         Iterator<Person> iterator = people.iterator();
         while(iterator.hasNext()) {
             listOfNames.add(iterator.next().getName());

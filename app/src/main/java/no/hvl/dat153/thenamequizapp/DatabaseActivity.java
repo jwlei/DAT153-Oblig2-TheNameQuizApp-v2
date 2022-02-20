@@ -17,7 +17,6 @@ public class DatabaseActivity extends AppCompatActivity {
 
     private static final String TAG = "DatabaseActivity";
 
-    Database database = Database.getInstance();
 
     Button sortAZ;
     Button sortZA;
