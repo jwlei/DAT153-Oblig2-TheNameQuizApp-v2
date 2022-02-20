@@ -4,7 +4,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,11 +14,14 @@ import android.widget.TextView;
 
 public class AddEntryActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddEntryActivity";
+
     Database database = Database.getInstance();
 
+    Uri imageUri;
     TextView tvName;
     Button addEntry;
-    ImageView image;
+    ImageView imageView;
 
     int PICK_IMAGE = 1;
 
@@ -27,7 +32,7 @@ public class AddEntryActivity extends AppCompatActivity {
 
         tvName = findViewById(R.id.editTextPersonName);
         addEntry = findViewById(R.id.buttonAddPerson);
-        image = findViewById(R.id.imageViewPersonPicture);
+        imageView = findViewById(R.id.imageViewPersonPicture);
 
 
         addEntry.setOnClickListener(new View.OnClickListener() {
@@ -35,12 +40,12 @@ public class AddEntryActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String name = tvName.getText().toString();
-                database.addPerson(name);
+                database.addPerson(name, imageUri);
 
             }
         });
 
-        image.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -58,7 +63,8 @@ public class AddEntryActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE) {
-
+            imageView.setImageURI(data.getData());
+            imageUri = data.getData();
         }
     }
 }

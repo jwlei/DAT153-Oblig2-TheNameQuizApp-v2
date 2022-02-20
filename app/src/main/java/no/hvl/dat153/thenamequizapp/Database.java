@@ -39,11 +39,10 @@ public class Database {
         return people.get(position);
     }
 
-    public boolean addPerson(String name) {
+    public boolean addPerson(String name, Uri imageUri) {
 
         if (name != null) {
-            people.add(new Person(name, Uri.parse("android.resource://" +
-                    BuildConfig.APPLICATION_ID + "/" + R.drawable.finn_arne)));
+            people.add(new Person(name, imageUri));
             return true;
         } else {
             return false;
