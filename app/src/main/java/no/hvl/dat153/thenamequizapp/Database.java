@@ -20,7 +20,13 @@ public class Database {
                 new Person("Per Otto",
                         Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto)),
                 new Person("Per Helge",
-                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge))
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_helge)),
+                new Person("Per Cristian",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_christian)),
+                new Person("Tosin",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.tosin)),
+                new Person("Sven Olai",
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto))
         ));
 
 
