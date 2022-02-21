@@ -26,7 +26,7 @@ public class Database {
                 new Person("Tosin",
                         Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.tosin)),
                 new Person("Sven Olai",
-                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.per_otto))
+                        Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.sven_olai))
         ));
 
 
