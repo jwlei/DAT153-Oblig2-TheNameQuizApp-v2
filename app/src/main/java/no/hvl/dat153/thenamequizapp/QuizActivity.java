@@ -25,7 +25,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     private RadioButton radioButton;
     private List<Person> person;
-    private List<String> listOfNames;
+    private String previousAns;
 
 
 
@@ -37,7 +37,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_quiz);
 
         person = Database.getInstance().getPeople();
-        listOfNames = Database.getInstance().getNames();
 
         initQuiz();
 
@@ -70,24 +69,29 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
             // Set Alternative A
             ans = person.get(a).getName();
+            while (ans.equals(previousAns)) {
+                a = rand.nextInt(person.size());
+                ans = person.get(a).getName();
+            }
+            previousAns = ans;
             buttonList.get(0).setText(ans);
 
             // Set Alternative B
-            String wrongAlternative1 = listOfNames.get(b);
+            String wrongAlternative1 = person.get(b).getName();
             while (ans.equals(wrongAlternative1)) {
-                b = rand.nextInt(listOfNames.size());
-                wrongAlternative1 = listOfNames.get(b);
+                b = rand.nextInt(person.size());
+                wrongAlternative1 = person.get(b).getName();
             }
-            String nameB = listOfNames.get(b);
+            String nameB = person.get(b).getName();
             buttonList.get(1).setText(nameB);
 
             // Set Alternative C
-            String wrongAlternative2 = listOfNames.get(c);
+            String wrongAlternative2 = person.get(c).getName();
             while (ans.equals(wrongAlternative2) || nameB.equals(wrongAlternative2)) {
-                c = rand.nextInt(listOfNames.size());
-                wrongAlternative2 = listOfNames.get(c);
+                c = rand.nextInt(person.size());
+                wrongAlternative2 = person.get(c).getName();
             }
-            String nameC = listOfNames.get(c);
+            String nameC = person.get(c).getName();
             buttonList.get(2).setText(nameC);
 
             //Set image for correct Answer
