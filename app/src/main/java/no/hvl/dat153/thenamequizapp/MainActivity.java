@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button database;
 
+    // ViewModel's job is to take data → make it so it can be displayed in UI.
+    //private PersonViewModel personViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         //Find button
         final Button take_quiz = findViewById(R.id.buttonQuiz);
         //Create intent
-        Intent quiz = new Intent(this,QuizActivity.class);
+        //Intent quiz = new Intent(this,QuizActivity.class);
         //Set onclick
-        take_quiz.setOnClickListener(v -> startActivity(quiz));
+        //take_quiz.setOnClickListener(v -> startActivity(quiz));
 
 
         database = findViewById(R.id.buttonDatabase);

@@ -1,3 +1,4 @@
+/*
 package no.hvl.dat153.thenamequizapp;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Database;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,10 +28,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton radioButton;
     private List<Person> person;
     private String previousAns;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,3 +132,4 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+*/

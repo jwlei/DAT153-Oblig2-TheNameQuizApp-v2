@@ -1,3 +1,4 @@
+/*
 package no.hvl.dat153.thenamequizapp;
 
 import android.net.Uri;
@@ -64,3 +65,4 @@ public class Database {
         return listOfNames;
     }
 }
+*/
