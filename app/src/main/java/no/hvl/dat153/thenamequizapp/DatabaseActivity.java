@@ -49,6 +49,7 @@ public class DatabaseActivity extends AppCompatActivity {
         sortAZ = findViewById(R.id.buttonSortAZ);
         sortZA = findViewById(R.id.buttonSortZA);
         addEntry = findViewById(R.id.buttonAddEntryDatabase);
+        delete = findViewById(R.id.buttonDelete);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

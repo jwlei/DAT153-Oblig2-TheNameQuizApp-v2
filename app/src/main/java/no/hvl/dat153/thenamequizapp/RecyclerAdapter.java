@@ -1,7 +1,6 @@
 package no.hvl.dat153.thenamequizapp;
 
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,17 +50,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         // Setting the image for ViewHolder's imageView
         holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(person.getImage()
                 , 0,person.getImage().length));
+
+        // Listener on the Person card's "delete" button
+        // removes in the recyclerview list, then tells the observing activity about it to sync with ViewModel→repo→database.
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Person personToRemove = personList.get(holder.getAdapterPosition());
+
+                personList.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         //return database.getPeople().size();
         return personList.size();
-    }
-
-    public Person getPosition(int position)
-    {
-        return personList.get(position);
     }
 
     public class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -77,6 +84,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
             delete = (Button) itemView.findViewById(R.id.buttonDelete);
+
+//            delete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    int position = getAdapterPosition();
+//                    if (listener != null && position != RecyclerView.NO_POSITION)
+//                    {
+//                        listener.onDeleteClick(personList.get(position));
+//                    }
+//                }
+//            });
 
 //            delete.setOnClickListener(new View.OnClickListener() {
 //                @Override
