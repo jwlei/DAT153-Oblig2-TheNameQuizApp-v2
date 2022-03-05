@@ -27,7 +27,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
     }
 
     public RecyclerAdapter() {
-        //Log.d(TAG, "RecyclerAdapter: People in database: " + database.getPeople().size());
         Log.d(TAG, "RecyclerAdapter: People in adapter collection: " + personList.size());
     }
 
@@ -42,8 +41,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
-        //holder.getTextviewPerson().setText(database.get(position).getName());
-        //holder.getImageView().setImageURI(database.get(position).getImage());
         Person person = personList.get(position);
         holder.textviewPerson.setText(person.getName());
 
@@ -57,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
             @Override
             public void onClick(View view) {
                 //Person personToRemove = personList.get(holder.getAdapterPosition());
-
+                //TODO: Fix that deleting only removes from RecyclerView and doesn't call ViewModel.delete...
                 personList.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
@@ -67,7 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
     @Override
     public int getItemCount() {
-        //return database.getPeople().size();
         return personList.size();
     }
 
@@ -76,7 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         // provide a reference to the view that's used
         private TextView textviewPerson;
         private ImageView imageView;
-        private Button delete; // removed in favour of decoupled solution.
+        private Button delete;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,27 +80,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
             delete = (Button) itemView.findViewById(R.id.buttonDelete);
-
-//            delete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int position = getAdapterPosition();
-//                    if (listener != null && position != RecyclerView.NO_POSITION)
-//                    {
-//                        listener.onDeleteClick(personList.get(position));
-//                    }
-//                }
-//            });
-
-//            delete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Log.d(TAG, "onClick: " + getAdapterPosition());
-//                    database.getPeople().remove(getAdapterPosition());
-//                    notifyItemRemoved(getAdapterPosition());
-//                }
-//            });
-
         }
     }
 }

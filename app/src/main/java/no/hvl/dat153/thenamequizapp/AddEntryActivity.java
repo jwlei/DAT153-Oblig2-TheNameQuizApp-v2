@@ -31,9 +31,6 @@ public class AddEntryActivity extends AppCompatActivity {
 
     private static final String TAG = "AddEntryActivity";
 
-    //Database database = Database.getInstance();
-
-    //Uri imageUri;
     TextView tvName;
     Button addEntry;
     ImageView imageView;
@@ -62,8 +59,6 @@ public class AddEntryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //String name = tvName.getText().toString();
-                //database.addPerson(name, imageUri);
                 if (chosenImage == null)
                 {
                     Toast.makeText(AddEntryActivity.this
@@ -106,12 +101,6 @@ public class AddEntryActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     activityResultLauncherForChooseImage.launch(intent);
                 }
-
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-
             }
         });
     }
@@ -178,16 +167,4 @@ public class AddEntryActivity extends AppCompatActivity {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-
-    //    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == PICK_IMAGE) {
-//
-//            imageUri = data.getData();
-//            getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            imageView.setImageURI(imageUri);
-//        }
-//    }
 }

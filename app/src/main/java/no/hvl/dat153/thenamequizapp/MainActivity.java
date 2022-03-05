@@ -4,42 +4,54 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button database;
+    private static final String TAG = "MainActivity";
 
-    // ViewModel's job is to take data → make it so it can be displayed in UI.
-    //private PersonViewModel personViewModel;
+    private Button database,take_quiz;
+    private Intent intent;
+
+    @Override
+    public void onClick(View view) {
+
+        Log.d(TAG, "onClick-Button clicked: " + view.getResources().getResourceEntryName(view.getId()));
+
+        switch(view.getId()){
+            case R.id.buttonDatabase:
+                intent = new Intent(this, DatabaseActivity.class);
+
+                startActivity(intent);
+                break;
+            case R.id.buttonQuiz:
+                intent = new Intent(this, QuizActivity.class);
+
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Find button
-        final Button take_quiz = findViewById(R.id.buttonQuiz);
-        //Create intent
-        //Intent quiz = new Intent(this,QuizActivity.class);
-        //Set onclick
-        //take_quiz.setOnClickListener(v -> startActivity(quiz));
+        Log.d(TAG, "onCreate");
 
-
+        take_quiz = findViewById(R.id.buttonQuiz);
+        take_quiz.setOnClickListener(this);
         database = findViewById(R.id.buttonDatabase);
+        database.setOnClickListener(this);
+    }
 
-
-
-
-
-        database.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(MainActivity.this, DatabaseActivity.class);
-                startActivity(intent);
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
     }
 }

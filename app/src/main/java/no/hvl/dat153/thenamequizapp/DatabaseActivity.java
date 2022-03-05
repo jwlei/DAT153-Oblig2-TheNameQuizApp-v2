@@ -26,7 +26,6 @@ public class DatabaseActivity extends AppCompatActivity {
 
     private PersonViewModel personViewModel;
 
-
     Button sortAZ;
     Button sortZA;
     Button addEntry;
@@ -43,7 +42,6 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        //Database database = Database.getInstance();
         registerActivityForAddEntry();
 
         sortAZ = findViewById(R.id.buttonSortAZ);
@@ -71,6 +69,7 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         });
 
+        //TODO: Fix sort AZ/ZA that works with the Room Database implementation...
 //        sortAZ.setOnClickListener(new View.OnClickListener() {
 //            @SuppressLint("NotifyDataSetChanged")
 //            @Override
@@ -136,14 +135,5 @@ public class DatabaseActivity extends AppCompatActivity {
 
                     }
                 });
-
     }
-
-/*    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: called");
-
-        adapter.notifyDataSetChanged();
-    }*/
 }
