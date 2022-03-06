@@ -69,21 +69,7 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         });
 
-        //Sort AZ
-        personViewModel.getAllPersonsAZ().observe(DatabaseActivity.this, new Observer<List<Person>>() {
-            @Override
-            public void onChanged(List<Person> personList) {
-                adapter.setPersonList(personList);
-            }
-        });
 
-        //Sort ZA
-        personViewModel.getAllPersonsZA().observe(DatabaseActivity.this, new Observer<List<Person>>() {
-            @Override
-            public void onChanged(List<Person> personList) {
-                adapter.setPersonList(personList);
-            }
-        });
 
 
         // ------------------ Buttons on-click ----------------
