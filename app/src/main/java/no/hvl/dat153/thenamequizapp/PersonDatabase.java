@@ -23,7 +23,6 @@ public abstract class PersonDatabase extends RoomDatabase {
         }
 
         return instance;
-
     }
 
 

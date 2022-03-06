@@ -53,7 +53,7 @@ public class DatabaseActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         //adapter = new RecyclerAdapter();
-        final RecyclerAdapter adapter = new RecyclerAdapter();
+        RecyclerAdapter adapter = new RecyclerAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -69,43 +69,74 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: Fix sort AZ/ZA that works with the Room Database implementation...
-//        sortAZ.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("NotifyDataSetChanged")
-//            @Override
-//            public void onClick(View view) {
-//
-//                database.getPeople().sort(Comparator.comparing(Person::getName));
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+        //Sort AZ
+        personViewModel.getAllPersonsAZ().observe(DatabaseActivity.this, new Observer<List<Person>>() {
+            @Override
+            public void onChanged(List<Person> personList) {
+                adapter.setPersonList(personList);
+            }
+        });
 
-//        sortZA.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("NotifyDataSetChanged")
-//            @Override
-//            public void onClick(View view) {
-//
-//                database.getPeople().sort(Comparator.comparing(Person::getName, Comparator.reverseOrder()));
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+        //Sort ZA
+        personViewModel.getAllPersonsZA().observe(DatabaseActivity.this, new Observer<List<Person>>() {
+            @Override
+            public void onChanged(List<Person> personList) {
+                adapter.setPersonList(personList);
+            }
+        });
+
+
+        // ------------------ Buttons on-click ----------------
+        //Sort AZ ON-CLICK
+        sortAZ.findViewById(R.id.buttonSortAZ);
+        sortAZ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortListAZ();
+            }
+        });
+
+
+        //Sort ZA ON-CLICK
+        sortZA.findViewById(R.id.buttonSortZA);
+        sortZA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortListZA();
+            }
+        });
 
         addEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(DatabaseActivity.this, AddEntryActivity.class);
                 //startActivity(intent);
 
                 //activity result launcher, because we are expecting some data back!!!
                 activityResultLauncherForAddEntry.launch(intent);
-
             }
         });
-
     }
+
+    // --------------- Methods ------------------
+    //Sort AZ
+    private void sortListAZ() {
+        personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
+        personViewModel.getAllPersonsAZ().observe(this,(List<Person> personList) -> {
+            adapter = new RecyclerAdapter(personList, this);
+            recyclerView.setAdapter(adapter);
+        });
+    }
+
+    //Sort ZA
+    private void sortListZA() {
+        personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
+        personViewModel.getAllPersonsZA().observe(this,(List<Person> personList) -> {
+            adapter = new RecyclerAdapter(personList, this);
+            recyclerView.setAdapter(adapter);
+        });
+    }
+
 
     private void registerActivityForAddEntry() {
 
@@ -129,10 +160,7 @@ public class DatabaseActivity extends AppCompatActivity {
                             //we create a new Person object, and use ViewModel to store.
                             Person person = new Person(name,image);
                             personViewModel.insert(person);
-
                         }
-
-
                     }
                 });
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,12 +15,16 @@ public class PersonRepository {
 
     private PersonDAO personDAO;
     private LiveData<List<Person>> personList;
+    private LiveData<List<Person>> personListAZ;
+    private LiveData<List<Person>> personListZA;
 
     public PersonRepository(Application application)
     {
         PersonDatabase database = PersonDatabase.getInstance(application);
         personDAO = database.personDAO();
         personList = personDAO.getAllPersons();
+        personListAZ = personDAO.getAllPersonsAZ();
+        personListZA = personDAO.getAllPersonsZA();
     }
 
     public void insert(Person person)
@@ -54,5 +59,13 @@ public class PersonRepository {
 
     public LiveData<List<Person>> getAllPersons() {
         return personList;
+    }
+
+    public LiveData<List<Person>> getAllPersonsAZ() {
+        return personListAZ;
+    }
+
+    public LiveData<List<Person>> getAllPersonsZA() {
+        return personListZA;
     }
 }

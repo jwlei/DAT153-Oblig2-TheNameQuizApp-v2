@@ -24,4 +24,10 @@ public interface PersonDAO {
     @Query("SELECT * FROM person ORDER BY person_id ASC")
     LiveData<List<Person>> getAllPersons();
 
+    @Query("SELECT * FROM person ORDER BY name ASC")
+    LiveData<List<Person>> getAllPersonsAZ();
+
+    @Query("SELECT * FROM person ORDER BY name DESC")
+    LiveData<List<Person>> getAllPersonsZA();
+
 }

@@ -18,8 +18,11 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PersonViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-//    private final Database database = Database.getInstance();
+    private DatabaseActivity databaseActivity;
+    //    private final Database database = Database.getInstance();
     private List<Person> personList = new ArrayList<>();
+
+
 
     public void setPersonList(List<Person> personList) {
         this.personList = personList;
@@ -28,6 +31,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
     public RecyclerAdapter() {
         Log.d(TAG, "RecyclerAdapter: People in adapter collection: " + personList.size());
+    }
+    public RecyclerAdapter(List<Person> personList, DatabaseActivity databaseActivity) {
+        this.personList = personList;
+        this.databaseActivity = databaseActivity;
     }
 
     @NonNull
