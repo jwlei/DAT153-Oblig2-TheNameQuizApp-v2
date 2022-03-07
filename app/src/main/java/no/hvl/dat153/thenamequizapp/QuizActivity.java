@@ -1,7 +1,9 @@
 package no.hvl.dat153.thenamequizapp;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,120 +12,218 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private String ans;
-    private int score;
-    private int attempts;
-    private boolean quizRunning = false;
-
-    private RadioButton radioButton;
-    private List<Person> person;
-    private List<String> listOfNames;
+public class QuizActivity extends AppCompatActivity {
 
 
+    private static final String TAG = "QuizActivity";
 
+    //Quiz variables
+    private String answer;
+    private static String correctAnswer = "";
+    private String displayScore;
+    private int noQuestion;
+    private int correctAnswers;
 
+    //The ViewModel
+    private PersonViewModel personViewModel;
+
+    //The components
+    private TextView score;
+    private Button submitButton,endQuizButton;
+    private ImageView quizImage;
+    private RadioGroup radioGroup;
+    private static RadioButton radioButtonA;
+    private static RadioButton radioButtonB;
+    private static RadioButton radioButtonC;
+    private RadioButton answeredButton;
+
+    private List<Person> randomPersonsList;
+    private Person correctPerson;
+    public static List<Person> allOptionsList;
+    public static ArrayList<Person> buttonIds = new ArrayList<>();
+
+    HashSet<Person> mixChoices = new HashSet<>();
+
+    private boolean quizFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        person = Database.getInstance().getPeople();
-        listOfNames = Database.getInstance().getNames();
 
-        initQuiz();
+        Log.d(TAG, "onCreate");
 
-        final Button endQuizBtn = findViewById(R.id.endQuizBtn);
-        endQuizBtn.setOnClickListener(view -> {
-            quizRunning = true;
-            initQuiz();
+        quizImage = findViewById(R.id.guessPicture);
+        radioGroup = findViewById(R.id.radio_btns);
+        radioButtonA = findViewById(R.id.quizAlternative1);
+        radioButtonB = findViewById(R.id.quitAlternative2);
+        radioButtonC = findViewById(R.id.quizAlternative3);
+
+
+
+        submitButton = findViewById(R.id.submitBtn);
+        endQuizButton = findViewById(R.id.endQuizBtn);
+        score = findViewById(R.id.score);
+
+        // Get ViewModel handle
+        personViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
+                .create(PersonViewModel.class);
+
+
+
+        if (randomPersonsList == null) {
+            populateRandomPersonsList();
+        }
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "submit button");
+                Log.d(TAG, "quizFlag: " +quizFlag);
+
+                int ansId = radioGroup.getCheckedRadioButtonId();
+
+                quizFlag = (noQuestion >= 1 && noQuestion < randomPersonsList.size()) ? (quizFlag = true) : (quizFlag = false);
+
+                Log.d(TAG, String.valueOf(noQuestion < randomPersonsList.size()));
+
+                answer = "";
+
+                Log.d(TAG, "ansId: " +ansId);
+
+
+
+                if (quizFlag) {
+                    answeredButton = findViewById(ansId);
+                    if (answeredButton != null) {
+                        answer = (String) answeredButton.getText();
+
+                        if (answer.equals(correctAnswer)) {
+                            correctAnswers = correctAnswers + 1;
+                        }
+
+                        displayScore = "Score: " +correctAnswers;
+                        score.setText(displayScore);
+                        radioGroup.clearCheck();
+
+                    }
+                }
+
+                newQuestion();
+            }
+        });
+
+        endQuizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "end quiz button");
+
+
+                    Intent result = new Intent(QuizActivity.this, ResultActivity.class);
+                    result.putExtra("score", String.valueOf(correctAnswers));
+                    //result.putExtra("attempts", String.valueOf(attempts));
+                    startActivity(result);
+            }
+        });
+
+        Log.d(TAG, "oncreate_end");
+    }
+
+    private void populateRandomPersonsList() {
+
+        personViewModel.getAllPersons().observe(QuizActivity.this, new Observer<List<Person>>() {
+            @Override
+            public void onChanged(List<Person> personList) {
+                Log.d(TAG, "populateRandomPersonsList, onChanged");
+
+                randomPersonsList = personList.subList(0, personList.size());
+
+                //add all to mixChoices list
+                mixChoices.clear();
+                mixChoices.addAll(randomPersonsList);
+
+                randomPersonsList.clear();
+
+                for (Person person : mixChoices) {
+                    Log.d(TAG, person.getName());
+                    randomPersonsList.add(person);
+                }
+            }
         });
     }
 
-    private void initQuiz() {
-        Random rand = new Random();
+    private void newQuestion() {
+        Log.d(TAG, "newQuestion()");
+        Log.d(TAG, "noQuestions: " +noQuestion);
+        Log.d(TAG, "randomPersonsList size: " + randomPersonsList.size());
 
-        if (quizRunning) {
-            Intent result = new Intent(this, ResultActivity.class);
-            result.putExtra("score", String.valueOf(score));
-            result.putExtra("attempts", String.valueOf(attempts));
-            startActivity(result);
-        } else {
-            Button btn1 = findViewById(R.id.quizAlternative1);
-            Button btn2 = findViewById(R.id.quitAlternative2);
-            Button btn3 = findViewById(R.id.quizAlternative3);
-
-            List<Button> buttonList = Arrays.asList(btn1, btn2, btn3);
-            Collections.shuffle(buttonList);
-
-            int a = rand.nextInt(person.size());
-            int b = rand.nextInt(person.size());
-            int c = rand.nextInt(person.size());
-
-            // Set Alternative A
-            ans = person.get(a).getName();
-            buttonList.get(0).setText(ans);
-
-            // Set Alternative B
-            String wrongAlternative1 = listOfNames.get(b);
-            while (ans.equals(wrongAlternative1)) {
-                b = rand.nextInt(listOfNames.size());
-                wrongAlternative1 = listOfNames.get(b);
-            }
-            String nameB = listOfNames.get(b);
-            buttonList.get(1).setText(nameB);
-
-            // Set Alternative C
-            String wrongAlternative2 = listOfNames.get(c);
-            while (ans.equals(wrongAlternative2) || nameB.equals(wrongAlternative2)) {
-                c = rand.nextInt(listOfNames.size());
-                wrongAlternative2 = listOfNames.get(c);
-            }
-            String nameC = listOfNames.get(c);
-            buttonList.get(2).setText(nameC);
-
-            //Set image for correct Answer
-            ImageView imageView = findViewById(R.id.guessPicture);
-            imageView.setImageURI(person.get(a).getImage());
-
-
+        if (noQuestion == randomPersonsList.size()) {
+            return;
         }
+
+        correctPerson = randomPersonsList.get(noQuestion);
+        correctAnswer = correctPerson.getName();
+
+        quizImage.setImageBitmap(
+        BitmapFactory.decodeByteArray(
+                correctPerson.getImage()
+                ,0
+                ,correctPerson.getImage().length));
+
+        List<Integer> shuffledIndices = new ArrayList<>();
+        for (Person person : randomPersonsList) {
+            if (randomPersonsList.indexOf(person) != noQuestion) {
+                shuffledIndices.add(randomPersonsList.indexOf(person));
+            }
+        }
+        Collections.shuffle(shuffledIndices);
+
+        Log.d(TAG, "shuffledIndices[0] = " + shuffledIndices.get(0) + " shuffledIndices[1] = " + shuffledIndices.get(1));
+
+        mixChoices.clear();
+        mixChoices.add(correctPerson);
+        mixChoices.add(randomPersonsList.get(shuffledIndices.get(0)));
+        mixChoices.add(randomPersonsList.get(shuffledIndices.get(1)));
+
+
+        allOptionsList = new ArrayList<>();
+
+
+        allOptionsList.addAll(mixChoices);
+        buttonIds.addAll(mixChoices);
+
+        radioButtonA.setText(allOptionsList.get(0).getName());
+        radioButtonB.setText(allOptionsList.get(1).getName());
+        radioButtonC.setText(allOptionsList.get(2).getName());
+
+
+
+        noQuestion = (noQuestion == randomPersonsList.size()) ? (noQuestion = randomPersonsList.size()) : (noQuestion = noQuestion+1);
     }
 
-    @Override
-    public void onClick(View view) {
-        String answer = "";
-        String displayScore = "";
-        RadioGroup radioGroup = findViewById(R.id.radio_btns);
 
-        int ansId = radioGroup.getCheckedRadioButtonId();
+    // WIP getting id of correct button
+    public static int getCorrectAns(){
 
-        radioButton = findViewById(ansId);
-        if (radioButton != null) {
-            attempts++;
-            answer = (String) radioButton.getText();
+        if (allOptionsList.get(0).equals(correctAnswer)){
+            return radioButtonA.getId();
 
-            if (answer.equals(ans)) {
-                score++;
-            }
+        } else if (allOptionsList.get(1).equals(correctAnswer)) {
+            return radioButtonB.getId();
 
-            displayScore = "Correct " + score + " after " + attempts + " tries.";
-            TextView textView = findViewById(R.id.score);
-            textView.setText(displayScore);
-            radioGroup.clearCheck();
-
-            // Reset screen for new question
-            initQuiz();
-        }
+        } else return radioButtonC.getId();
     }
+
 }
 
 

@@ -40,20 +40,20 @@
 
     <RadioGroup
         android:id="@+id/radio_btns"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="334dp"
+        android:layout_height="113dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:gravity="center"
         android:textAlignment="center">
 
         <RadioButton
-            android:id="@+id/quizAlternative3"
+            android:id="@+id/quizAlternative1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
 
-            android:text="@string/quizBtnC" />
+            android:text="@string/quizBtnA" />
 
         <RadioButton
             android:id="@+id/quitAlternative2"
@@ -63,11 +63,11 @@
             android:text="@string/quizBtnB" />
 
         <RadioButton
-            android:id="@+id/quizAlternative1"
+            android:id="@+id/quizAlternative3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/quizBtnA" />
+            android:text="@string/quizBtnC" />
     </RadioGroup>
 
     <Button
