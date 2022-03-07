@@ -21,7 +21,7 @@ public class ResultActivity extends AppCompatActivity {
             score = extras.getString("score");
         }
 
-        String display = "The positive score was: " +score;
+        String display = "Score: " +score;
         TextView textView = findViewById(R.id.showResult);
         textView.setText(display);
 

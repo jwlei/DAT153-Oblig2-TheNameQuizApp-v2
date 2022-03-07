@@ -7,6 +7,5 @@ package no.hvl.dat153.thenamequizapp;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class DatabaseEntriesCheckerTest {
-
+public class DatabaseAddTest {
 }

@@ -167,4 +167,5 @@ public class AddEntryActivity extends AppCompatActivity {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
 }

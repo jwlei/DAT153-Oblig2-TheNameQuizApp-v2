@@ -87,9 +87,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 Log.d(TAG, String.valueOf(noQuestion < randomPersonsList.size()));
 
-
                 answer = "";
-
 
                 Log.d(TAG, "ansId: " +ansId);
 
@@ -102,7 +100,7 @@ public class QuizActivity extends AppCompatActivity {
                             correctAnswers = correctAnswers + 1;
                         }
 
-                        displayScore = "Positive score: " +correctAnswers;
+                        displayScore = "Score: " +correctAnswers;
                         score.setText(displayScore);
                         radioGroup.clearCheck();
 
@@ -118,12 +116,11 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "end quiz button");
 
-                if (noQuestion == randomPersonsList.size()) {
+
                     Intent result = new Intent(QuizActivity.this, ResultActivity.class);
                     result.putExtra("score", String.valueOf(correctAnswers));
                     //result.putExtra("attempts", String.valueOf(attempts));
                     startActivity(result);
-                }
             }
         });
 
@@ -195,6 +192,7 @@ public class QuizActivity extends AppCompatActivity {
 
         noQuestion = (noQuestion == randomPersonsList.size()) ? (noQuestion = randomPersonsList.size()) : (noQuestion = noQuestion+1);
     }
+
 
 }
 
