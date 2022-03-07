@@ -17,7 +17,6 @@ import android.view.View;
 import android.util.Log;
 import android.widget.Button;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseActivity extends AppCompatActivity {
