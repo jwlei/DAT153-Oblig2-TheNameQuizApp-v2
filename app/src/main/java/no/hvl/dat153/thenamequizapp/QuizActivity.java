@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +28,7 @@ public class QuizActivity extends AppCompatActivity {
 
     //Quiz variables
     private String answer;
-    private String correctAnswer;
+    private static String correctAnswer = "";
     private String displayScore;
     private int noQuestion;
     private int correctAnswers;
@@ -40,11 +41,15 @@ public class QuizActivity extends AppCompatActivity {
     private Button submitButton,endQuizButton;
     private ImageView quizImage;
     private RadioGroup radioGroup;
-    private RadioButton radioButtonA,radioButtonB,radioButtonC,answeredButton;
+    private static RadioButton radioButtonA;
+    private static RadioButton radioButtonB;
+    private static RadioButton radioButtonC;
+    private RadioButton answeredButton;
 
     private List<Person> randomPersonsList;
     private Person correctPerson;
-    private List<Person> allOptionsList;
+    public static List<Person> allOptionsList;
+    public static ArrayList<Person> buttonIds = new ArrayList<>();
 
     HashSet<Person> mixChoices = new HashSet<>();
 
@@ -55,6 +60,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+
         Log.d(TAG, "onCreate");
 
         quizImage = findViewById(R.id.guessPicture);
@@ -63,6 +69,8 @@ public class QuizActivity extends AppCompatActivity {
         radioButtonB = findViewById(R.id.quitAlternative2);
         radioButtonC = findViewById(R.id.quizAlternative3);
 
+
+
         submitButton = findViewById(R.id.submitBtn);
         endQuizButton = findViewById(R.id.endQuizBtn);
         score = findViewById(R.id.score);
@@ -70,6 +78,8 @@ public class QuizActivity extends AppCompatActivity {
         // Get ViewModel handle
         personViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
                 .create(PersonViewModel.class);
+
+
 
         if (randomPersonsList == null) {
             populateRandomPersonsList();
@@ -90,6 +100,8 @@ public class QuizActivity extends AppCompatActivity {
                 answer = "";
 
                 Log.d(TAG, "ansId: " +ansId);
+
+
 
                 if (quizFlag) {
                     answeredButton = findViewById(ansId);
@@ -161,6 +173,7 @@ public class QuizActivity extends AppCompatActivity {
 
         correctPerson = randomPersonsList.get(noQuestion);
         correctAnswer = correctPerson.getName();
+
         quizImage.setImageBitmap(
         BitmapFactory.decodeByteArray(
                 correctPerson.getImage()
@@ -182,17 +195,34 @@ public class QuizActivity extends AppCompatActivity {
         mixChoices.add(randomPersonsList.get(shuffledIndices.get(0)));
         mixChoices.add(randomPersonsList.get(shuffledIndices.get(1)));
 
+
         allOptionsList = new ArrayList<>();
 
+
         allOptionsList.addAll(mixChoices);
+        buttonIds.addAll(mixChoices);
 
         radioButtonA.setText(allOptionsList.get(0).getName());
         radioButtonB.setText(allOptionsList.get(1).getName());
         radioButtonC.setText(allOptionsList.get(2).getName());
 
+
+
         noQuestion = (noQuestion == randomPersonsList.size()) ? (noQuestion = randomPersonsList.size()) : (noQuestion = noQuestion+1);
     }
 
+
+    // WIP getting id of correct button
+    public static int getCorrectAns(){
+
+        if (allOptionsList.get(0).equals(correctAnswer)){
+            return radioButtonA.getId();
+
+        } else if (allOptionsList.get(1).equals(correctAnswer)) {
+            return radioButtonB.getId();
+
+        } else return radioButtonC.getId();
+    }
 
 }
 

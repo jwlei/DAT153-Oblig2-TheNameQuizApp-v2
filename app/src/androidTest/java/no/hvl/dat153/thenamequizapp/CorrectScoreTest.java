@@ -6,6 +6,9 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.widget.Button;
+import android.widget.RadioButton;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -31,8 +34,11 @@ public class CorrectScoreTest {
     public void correctQuestion(){
       // TODO: Get correct answer from Quiz
 
+        //int btn = no.hvl.dat153.thenamequizapp.QuizActivity.getCorrectAns();
 
-
+        onView(withId(R.id.quizAlternative1)).perform(click());
+        onView(withId(R.id.submitBtn)).perform(click());
+        onView(withId(R.id.submitBtn)).perform(click());
         onView(withId(R.id.endQuizBtn)).perform(click());
         onView(withId(R.id.showResult)).check(matches(withText("Score: 1")));
     }
@@ -41,7 +47,8 @@ public class CorrectScoreTest {
     public void wrongQuestion(){
         // TODO: Get guaranteed wrong answer from Quiz
 
-
+        onView(withId(R.id.quizAlternative1)).perform(click());
+        onView(withId(R.id.submitBtn)).perform(click());
         onView(withId(R.id.endQuizBtn)).perform(click());
         onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));
     }

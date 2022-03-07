@@ -48,7 +48,7 @@
         android:textAlignment="center">
 
         <RadioButton
-            android:id="@+id/quizAlternative3"
+            android:id="@+id/quizAlternative1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -63,7 +63,7 @@
             android:text="@string/quizBtnB" />
 
         <RadioButton
-            android:id="@+id/quizAlternative1"
+            android:id="@+id/quizAlternative3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
