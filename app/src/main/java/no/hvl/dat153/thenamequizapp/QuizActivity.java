@@ -40,6 +40,11 @@ public class QuizActivity extends AppCompatActivity {
     private TextView score;
     private Button submitButton,endQuizButton;
     private ImageView quizImage;
+
+    public RadioGroup getRadioGroup() {
+        return radioGroup;
+    }
+
     private RadioGroup radioGroup;
     private static RadioButton radioButtonA;
     private static RadioButton radioButtonB;
@@ -47,6 +52,9 @@ public class QuizActivity extends AppCompatActivity {
     private RadioButton answeredButton;
 
     private List<Person> randomPersonsList;
+
+
+
     private Person correctPerson;
     public static List<Person> allOptionsList;
     public static ArrayList<Person> buttonIds = new ArrayList<>();
@@ -222,6 +230,10 @@ public class QuizActivity extends AppCompatActivity {
             return radioButtonB.getId();
 
         } else return radioButtonC.getId();
+    }
+
+    public Person getCorrectPerson() {
+        return correctPerson;
     }
 
 }

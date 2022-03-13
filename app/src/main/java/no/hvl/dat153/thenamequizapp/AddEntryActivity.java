@@ -14,6 +14,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -154,6 +155,11 @@ public class AddEntryActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public void getImageFromResource() {
+        chosenImage = BitmapFactory.decodeResource(getResources(), R.drawable.finn_arne);
+        imageView.setImageBitmap(chosenImage);
     }
 
     @Override

@@ -30,4 +30,10 @@ public interface PersonDAO {
     @Query("SELECT * FROM person ORDER BY name DESC")
     LiveData<List<Person>> getAllPersonsZA();
 
+    @Query("SELECT * FROM person")
+    List<Person> getAllCount();
+
+    @Query("SELECT * FROM person WHERE name=:name")
+    Person getPersonByName(String name);
+
 }
