@@ -73,11 +73,11 @@ public class DatabaseRemoveTest {
         int noPersons = getNoPersonsInDatabase();
 
         onView(withId(R.id.recyclerView))
-                .perform(actionOnItemAtPosition(3, scrollTo()));
+                .perform(actionOnItemAtPosition(1, scrollTo()));
 
         //Perform swipe right
         onView(withId(R.id.recyclerView))
-                .perform(actionOnItemAtPosition(3, swipeLeft()));
+                .perform(actionOnItemAtPosition(1, swipeLeft()));
 
         //assert number of person in database is noPersons - 1
         assertEquals(getNoPersonsInDatabase(), (noPersons-1));
