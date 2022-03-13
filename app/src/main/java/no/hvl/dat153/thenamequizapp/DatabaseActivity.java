@@ -4,9 +4,11 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,6 @@ public class DatabaseActivity extends AppCompatActivity {
     Button sortAZ;
     Button sortZA;
     Button addEntry;
-    Button delete;
 
     RecyclerView recyclerView;
     RecyclerAdapter adapter;
@@ -47,7 +48,6 @@ public class DatabaseActivity extends AppCompatActivity {
         sortAZ = findViewById(R.id.buttonSortAZ);
         sortZA = findViewById(R.id.buttonSortZA);
         addEntry = findViewById(R.id.buttonAddEntryDatabase);
-        delete = findViewById(R.id.buttonDelete);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -102,6 +102,21 @@ public class DatabaseActivity extends AppCompatActivity {
                 activityResultLauncherForAddEntry.launch(intent);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                personViewModel.delete(adapter.getPersonInPosition(viewHolder.getAdapterPosition()));
+
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     // --------------- Methods ------------------

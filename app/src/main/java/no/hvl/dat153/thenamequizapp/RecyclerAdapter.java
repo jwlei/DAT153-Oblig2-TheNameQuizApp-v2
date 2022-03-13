@@ -19,14 +19,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
 
     private static final String TAG = "RecyclerAdapter";
     private DatabaseActivity databaseActivity;
-    //    private final Database database = Database.getInstance();
     private List<Person> personList = new ArrayList<>();
-
-
 
     public void setPersonList(List<Person> personList) {
         this.personList = personList;
         notifyDataSetChanged();
+    }
+
+    public Person getPersonInPosition(int position) {
+
+        return personList.get(position);
     }
 
     public RecyclerAdapter() {
@@ -54,19 +56,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         // Setting the image for ViewHolder's imageView
         holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(person.getImage()
                 , 0,person.getImage().length));
-
-        // Listener on the Person card's "delete" button
-        // removes in the recyclerview list, then tells the observing activity about it to sync with ViewModel→repo→database.
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Person personToRemove = personList.get(holder.getAdapterPosition());
-                //TODO: Fix that deleting only removes from RecyclerView and doesn't call ViewModel.delete...
-                personList.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
-            }
-        });
     }
 
     @Override
@@ -79,14 +68,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         // provide a reference to the view that's used
         private TextView textviewPerson;
         private ImageView imageView;
-        private Button delete;
 
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
-            delete = (Button) itemView.findViewById(R.id.buttonDelete);
         }
     }
 }
