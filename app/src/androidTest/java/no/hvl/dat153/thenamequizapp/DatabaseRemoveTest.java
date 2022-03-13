@@ -39,9 +39,6 @@ public class DatabaseRemoveTest {
     private static final String TAG = "DatabaseRemoveTest";
     private PersonDatabase database;
     private PersonDAO personDAO;
-    //private Context context;
-    private int numberPersons;
-
 
     //ActivityTestRule is deprecated but could not get a handle for the application activity
     //from ActivityScenarioRule.
@@ -52,8 +49,6 @@ public class DatabaseRemoveTest {
 
     @Before
     public void setupDatabase() {
-        //context = ApplicationProvider.getApplicationContext();
-        //database = Room.inMemoryDatabaseBuilder(context, PersonDatabase.class).build();
         database = PersonDatabase.getInstance(mActivityRule.getActivity().getApplication());
         personDAO = database.personDAO();
     }
@@ -65,11 +60,6 @@ public class DatabaseRemoveTest {
 
     @Test
     public void removeInPosition() throws Exception {
-
-        //GET number of Person in database noPersons
-//        RecyclerView recyclerView;
-//        recyclerView = findViewById(R.id.recyclerView);
-//        int itemCount = recyclerView.getAdapter().getItemCount();
         int noPersons = getNoPersonsInDatabase();
 
         onView(withId(R.id.recyclerView))
