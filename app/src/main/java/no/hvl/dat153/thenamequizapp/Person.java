@@ -1,8 +1,13 @@
 package no.hvl.dat153.thenamequizapp;
 
 import android.net.Uri;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 @Entity(tableName = "person")
 public class Person {
@@ -15,10 +20,6 @@ public class Person {
     public String name;
     public byte[] image;
 
-//    public Person(String name, Uri image) {
-//        this.name = name;
-//        this.image = image;
-//    }
     public Person(String name, byte[] image) {
         this.name = name;
         this.image = image;
@@ -55,5 +56,26 @@ public class Person {
         this.name = name;
     }
 
+    public static Comparator<Person> PersonNameAZComparator = new Comparator<Person>() {
+        @Override
+        public int compare(Person person1, Person person2) {
+            return person1.getName().compareTo(person2.getName());
+        }
+    };
 
+    public static Comparator<Person> PersonNameZAComparator = new Comparator<Person>() {
+        @Override
+        public int compare(Person person1, Person person2) {
+            return person2.getName().compareTo(person1.getName());
+        }
+    };
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Person{" +
+                "person_id=" + person_id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

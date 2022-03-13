@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PersonViewHolder> {
@@ -75,5 +76,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
             textviewPerson = (TextView) itemView.findViewById(R.id.textViewPersonName);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewImage);
         }
+    }
+
+    public void sortPersonListAZ() {
+        Log.d(TAG, "sortPersonListAZ");
+        personList.sort(Person.PersonNameAZComparator);
+        // might be a need to notify or set again
+        notifyDataSetChanged();
+    }
+
+    public void sortPersonListZA() {
+        Log.d(TAG, "sortPersonListAZ");
+        personList.sort(Person.PersonNameZAComparator);
+        // might be a need to notify or set again
+        notifyDataSetChanged();
     }
 }

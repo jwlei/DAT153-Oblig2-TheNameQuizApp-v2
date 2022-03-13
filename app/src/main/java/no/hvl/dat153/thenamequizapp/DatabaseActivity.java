@@ -70,15 +70,14 @@ public class DatabaseActivity extends AppCompatActivity {
         });
 
 
-
-
         // ------------------ Buttons on-click ----------------
         //Sort AZ ON-CLICK
         sortAZ.findViewById(R.id.buttonSortAZ);
         sortAZ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sortListAZ();
+                Log.d(TAG, "button click, sort AZ");
+                adapter.sortPersonListAZ();
             }
         });
 
@@ -88,7 +87,8 @@ public class DatabaseActivity extends AppCompatActivity {
         sortZA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sortListZA();
+                Log.d(TAG, "button click, sort ZA");
+                adapter.sortPersonListZA();
             }
         });
 
@@ -118,26 +118,6 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
     }
-
-    // --------------- Methods ------------------
-    //Sort AZ
-    private void sortListAZ() {
-        personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
-        personViewModel.getAllPersonsAZ().observe(this,(List<Person> personList) -> {
-            adapter = new RecyclerAdapter(personList, this);
-            recyclerView.setAdapter(adapter);
-        });
-    }
-
-    //Sort ZA
-    private void sortListZA() {
-        personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
-        personViewModel.getAllPersonsZA().observe(this,(List<Person> personList) -> {
-            adapter = new RecyclerAdapter(personList, this);
-            recyclerView.setAdapter(adapter);
-        });
-    }
-
 
     private void registerActivityForAddEntry() {
 
