@@ -8,6 +8,9 @@
 ![398-WindowCaputure-TheNameQuizApp_–_DatabaseRemoveTest java_ TheNameQ-03-13_22h-30m-35s](https://user-images.githubusercontent.com/54099045/158080027-46f47ce5-4ede-4212-8528-c833782bff39.png)
 ![399-WindowCaputure-TheNameQuizApp_–_DatabaseAddTest java_ TheNameQuiz-03-13_22h-30m-52s](https://user-images.githubusercontent.com/54099045/158080031-962d1236-58ca-4cd3-aec6-57ed08f5e9e6.png)
 
+![402-Screenshot-03-14_09h-58m-16s](https://user-images.githubusercontent.com/54099045/158138494-615e36c2-a537-4f4c-80b3-8c146294b6ad.png)
+### Build fails due to one test not working when running the full gradle connectedDebugAndroidTest. It works seperatly. 
+
 
 ## Generated APKs during testing
 
