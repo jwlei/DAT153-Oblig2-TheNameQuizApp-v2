@@ -17,3 +17,9 @@ App apk
 
 
 What ADB commands
+
+adb install -r myapp.apk
+
+adb install -r mytestapp.apk
+
+adb shell am instrument -w -e debug false -e class <packageName>.<className> <packageName>.test/testRunner
