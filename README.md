@@ -1,4 +1,7 @@
+
 # Dat153Oblig1
+### All Tests OK
+![403-Screenshot-03-14_13h-27m-33s](https://user-images.githubusercontent.com/54099045/158171983-6c174721-e23b-4ea2-8e0a-a181eca36796.png)
 
 ![368-WindowCaputure-TheNameQuizApp_–_CorrectScoreTest java_ TheNameQui-03-07_20h-44m-00s](https://user-images.githubusercontent.com/54099045/157106777-5c1eab69-6939-4b33-b68f-516666e556fd.png)
 
