@@ -15,6 +15,15 @@
 ### Build fails due to one test not working when running the full gradle connectedDebugAndroidTest. It works seperatly. 
 
 
+Authors:
+
+jwlei
+
+finleif
+
+pofurre
+
+
 ## Generated APKs during testing
 
 Test apk
