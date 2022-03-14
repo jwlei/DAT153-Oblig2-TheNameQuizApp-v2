@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.RadioGroup;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -20,6 +21,7 @@ import androidx.test.runner.lifecycle.Stage;
 
 import junit.framework.AssertionFailedError;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,6 +41,12 @@ public class QuizProgressTest {
     @Before
     public void startQuiz() {
         onView(withId(R.id.submitBtn)).perform(click());
+    }
+
+    @After
+    public void backToStart() {
+        onView(withId(R.id.returnToStartBtn)).perform(click());
+        onView(withId(R.id.buttonQuiz)).perform(click());
     }
 
     @Test
@@ -73,19 +81,14 @@ public class QuizProgressTest {
         } catch (AssertionFailedError e) {
         }
 
-
-
-
-
-
         // Click on submit
         onView(withId(R.id.submitBtn)).perform(click());
 
         onView(withId(R.id.endQuizBtn)).perform(click());
 
+        // assert at score = "Score: 1"
         onView(withId(R.id.showResult)).check(matches(withText("Score: 1")));
 
-        // assert at score = score+1
     }
 
     @Test
@@ -93,14 +96,14 @@ public class QuizProgressTest {
         // hent Person objektet som vises i bildet nå
         // og ta tak i nåværende score
 
-        QuizActivity quizActivity = (QuizActivity) getInstance();
+        QuizActivity quizActivityWrong = (QuizActivity) getInstance();
 
-        Person correctPerson = quizActivity.getCorrectPerson();
+        Person correctPerson = quizActivityWrong.getCorrectPerson();
         String correctName = correctPerson.getName();
 
 
         // velg radiobutton med tekst som er lik riktig person sitt navn
-        RadioGroup radioGroup = quizActivity.getRadioGroup();
+        RadioGroup radioGroup = quizActivityWrong.getRadioGroup();
 
         //onView(withId(R.id.quizAlternative1).matches(withText(correctName))).perform()
 
@@ -129,7 +132,6 @@ public class QuizProgressTest {
 
     @Test
     public void noQuestions() {
-        QuizActivity quizActivity = (QuizActivity) getInstance();
         onView(withId(R.id.endQuizBtn)).perform(click());
 
         onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));

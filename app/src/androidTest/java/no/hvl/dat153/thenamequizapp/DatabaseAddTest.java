@@ -55,10 +55,12 @@ public class DatabaseAddTest {
         personDAO = database.personDAO();
     }
 
+    /*
     @After
-    public void closeDatabase() {
+         public void closeDatabase() {
         database.close();
-    }
+    }*/
+
     //public ActivityTestRule<DatabaseActivity> mActivityRule = new ActivityTestRule<>(DatabaseActivity.class);
 
     @Test

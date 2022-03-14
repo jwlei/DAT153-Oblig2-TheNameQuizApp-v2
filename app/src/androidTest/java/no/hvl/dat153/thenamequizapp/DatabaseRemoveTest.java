@@ -5,10 +5,14 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import androidx.test.runner.lifecycle.Stage;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +21,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
+
+import android.app.Activity;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 import no.hvl.dat153.thenamequizapp.activities.DatabaseActivity;
 import no.hvl.dat153.thenamequizapp.roomdatabase.PersonDAO;
@@ -36,18 +45,22 @@ public class DatabaseRemoveTest {
     @Rule
     //public ActivityScenarioRule<DatabaseActivity> activityScenarioRule
     //        = new ActivityScenarioRule<>(DatabaseActivity.class);
-    public ActivityTestRule<DatabaseActivity> mActivityRule = new ActivityTestRule<>(DatabaseActivity.class);
+    public ActivityScenarioRule<DatabaseActivity> activityScenarioRule
+            = new ActivityScenarioRule<>(DatabaseActivity.class);
 
     @Before
     public void setupDatabase() {
-        database = PersonDatabase.getInstance(mActivityRule.getActivity().getApplication());
+        DatabaseActivity databaseActivity = (DatabaseActivity) getInstance();
+        database = PersonDatabase.getInstance(databaseActivity);
         personDAO = database.personDAO();
     }
+
 
     @After
     public void closeDatabase() {
         database.close();
     }
+
 
     @Test
     public void removeInPosition() throws Exception {
@@ -65,8 +78,22 @@ public class DatabaseRemoveTest {
     }
 
     private int getNoPersonsInDatabase() {
-
         return personDAO.getAllCount().size();
     }
 
+
+    private Activity getInstance() {
+        final Activity[] currentActivity = {null};
+
+        // Bruker instrumentationregistry for å hente ut en en instance av aktivitet som er "Resumed" altså aktiv via activityLifeCycleMonitor
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                Collection<Activity> resumedActivity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+                Iterator<Activity> iterator = resumedActivity.iterator();
+                currentActivity[0] = iterator.next();
+            }
+        });
+        return currentActivity[0];
+    }
 }
