@@ -1,11 +1,10 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.recyclerview;
 
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
+import no.hvl.dat153.thenamequizapp.R;
+import no.hvl.dat153.thenamequizapp.activities.DatabaseActivity;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.PersonViewHolder> {
 

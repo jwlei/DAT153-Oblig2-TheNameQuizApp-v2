@@ -1,4 +1,4 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.roomdatabase;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

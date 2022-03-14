@@ -1,12 +1,9 @@
-package no.hvl.dat153.thenamequizapp;
-
-import android.net.Uri;
+package no.hvl.dat153.thenamequizapp.roomdatabase;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 @Entity(tableName = "person")

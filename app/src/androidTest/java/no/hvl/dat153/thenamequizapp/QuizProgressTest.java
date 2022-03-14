@@ -3,38 +3,32 @@ package no.hvl.dat153.thenamequizapp;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasSibling;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.widget.RadioGroup;
 
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.ViewInteraction;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
 import junit.framework.AssertionFailedError;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.Collection;
 import java.util.Iterator;
+
+import no.hvl.dat153.thenamequizapp.activities.QuizActivity;
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
 
 public class QuizProgressTest {
 
@@ -131,6 +125,14 @@ public class QuizProgressTest {
         onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));
 
         // assert at score = score+1
+    }
+
+    @Test
+    public void noQuestions() {
+        QuizActivity quizActivity = (QuizActivity) getInstance();
+        onView(withId(R.id.endQuizBtn)).perform(click());
+
+        onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));
     }
 
     private Activity getInstance() {

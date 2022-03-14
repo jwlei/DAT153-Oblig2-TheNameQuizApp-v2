@@ -4,12 +4,9 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.intent.Intents;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -17,6 +14,8 @@ import androidx.test.filters.LargeTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import no.hvl.dat153.thenamequizapp.activities.MainActivity;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -34,7 +33,7 @@ public class ButtonToActivityTest {
         //onView(withId(R.id.buttonQuiz)).perform(click());
         onView(withId(R.id.buttonQuiz)).perform(click());
 
-        //intended(toPackage("no.hvl.dat153.thenamequizapp.QuizActivity"));
+        //intended(toPackage("no.hvl.dat153.thenamequizapp.activities.QuizActivity"));
 
         //Check that an element on the quiz activity is displaying, verifying that we have launched the the correct
         //activity, could also check for intent matching result?

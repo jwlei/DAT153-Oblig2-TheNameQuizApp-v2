@@ -10,13 +10,11 @@ import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.r
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
@@ -30,6 +28,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
+
+import no.hvl.dat153.thenamequizapp.activities.AddEntryActivity;
+import no.hvl.dat153.thenamequizapp.activities.DatabaseActivity;
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonDAO;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonDatabase;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -112,6 +116,8 @@ public class DatabaseAddTest {
 
     private Activity getInstance() {
         final Activity[] currentActivity = {null};
+
+        // Bruker instrumentationregistry for å hente ut en en instance av aktivitet som er "Resumed" altså aktiv via activityLifeCycleMonitor
         getInstrumentation().runOnMainSync(new Runnable() {
             @Override
             public void run() {

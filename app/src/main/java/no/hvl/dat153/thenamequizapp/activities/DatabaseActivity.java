@@ -1,4 +1,4 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +20,11 @@ import android.widget.Button;
 
 
 import java.util.List;
+
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonViewModel;
+import no.hvl.dat153.thenamequizapp.R;
+import no.hvl.dat153.thenamequizapp.recyclerview.RecyclerAdapter;
 
 public class DatabaseActivity extends AppCompatActivity {
 

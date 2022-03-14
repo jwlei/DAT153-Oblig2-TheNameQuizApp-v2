@@ -1,11 +1,10 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.activities;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -15,10 +14,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +24,8 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import no.hvl.dat153.thenamequizapp.R;
 
 public class AddEntryActivity extends AppCompatActivity {
 
@@ -157,6 +156,7 @@ public class AddEntryActivity extends AppCompatActivity {
                 });
     }
 
+    // For test
     public void getImageFromResource() {
         chosenImage = BitmapFactory.decodeResource(getResources(), R.drawable.finn_arne);
         imageView.setImageBitmap(chosenImage);

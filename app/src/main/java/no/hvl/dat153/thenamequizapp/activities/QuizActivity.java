@@ -1,4 +1,4 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.activities;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -16,10 +16,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonViewModel;
+import no.hvl.dat153.thenamequizapp.R;
 
 public class QuizActivity extends AppCompatActivity {
 

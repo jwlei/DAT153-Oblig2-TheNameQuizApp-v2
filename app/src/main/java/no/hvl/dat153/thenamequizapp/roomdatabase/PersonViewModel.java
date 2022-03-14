@@ -1,4 +1,4 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.roomdatabase;
 
 import android.app.Application;
 
@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import java.util.Comparator;
 import java.util.List;
+
+import no.hvl.dat153.thenamequizapp.roomdatabase.Person;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonRepository;
 
 public class PersonViewModel extends AndroidViewModel {
 

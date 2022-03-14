@@ -6,13 +6,6 @@ import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -25,11 +18,9 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import android.content.Context;
-import android.util.Log;
-
-import java.util.List;
-import java.util.Objects;
+import no.hvl.dat153.thenamequizapp.activities.DatabaseActivity;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonDAO;
+import no.hvl.dat153.thenamequizapp.roomdatabase.PersonDatabase;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -63,11 +54,11 @@ public class DatabaseRemoveTest {
         int noPersons = getNoPersonsInDatabase();
 
         onView(withId(R.id.recyclerView))
-                .perform(actionOnItemAtPosition(1, scrollTo()));
+                .perform(actionOnItemAtPosition(0, scrollTo()));
 
         //Perform swipe right
         onView(withId(R.id.recyclerView))
-                .perform(actionOnItemAtPosition(1, swipeLeft()));
+                .perform(actionOnItemAtPosition(0, swipeLeft()));
 
         //assert number of person in database is noPersons - 1
         assertEquals(getNoPersonsInDatabase(), (noPersons-1));

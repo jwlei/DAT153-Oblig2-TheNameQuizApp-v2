@@ -1,4 +1,4 @@
-package no.hvl.dat153.thenamequizapp;
+package no.hvl.dat153.thenamequizapp.roomdatabase;
 
 import android.content.Context;
 

@@ -13,20 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheNameQuizApp">
         <activity
-            android:name=".DatabaseActivity"
+            android:name=".activities.DatabaseActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
-            android:name=".AddEntryActivity"
+            android:name=".activities.AddEntryActivity"
             android:exported="false"
-            android:parentActivityName=".DatabaseActivity"/>
-        <activity android:name=".ResultActivity"/>
+            android:parentActivityName=".activities.DatabaseActivity"/>
+        <activity android:name=".activities.ResultActivity"/>
         <activity
-            android:name=".QuizActivity"
+            android:name=".activities.QuizActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
