@@ -9,14 +9,14 @@
 ![399-WindowCaputure-TheNameQuizApp_–_DatabaseAddTest java_ TheNameQuiz-03-13_22h-30m-52s](https://user-images.githubusercontent.com/54099045/158080031-962d1236-58ca-4cd3-aec6-57ed08f5e9e6.png)
 
 
-Generated APKs during testing
+## Generated APKs during testing
 
 Test apk
 
 App apk
 
 
-What ADB commands
+## What ADB commands
 
 adb install -r myapp.apk
 
