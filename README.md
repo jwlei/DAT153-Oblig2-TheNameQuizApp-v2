@@ -10,7 +10,10 @@
 
 
 Generated APKs during testing
+
 Test apk
+
 App apk
+
 
 What ADB commands
