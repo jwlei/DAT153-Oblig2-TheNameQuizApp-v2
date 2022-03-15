@@ -10,21 +10,19 @@ import java.util.concurrent.Executors;
 
 public class PersonRepository {
 
+    // Executor service which performs the action in a background thread to avoid race-conditions
     ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     private PersonDAO personDAO;
     private LiveData<List<Person>> personList;
-    private LiveData<List<Person>> personListAZ;
-    private LiveData<List<Person>> personListZA;
 
     public PersonRepository(Application application)
     {
         PersonDatabase database = PersonDatabase.getInstance(application);
         personDAO = database.personDAO();
         personList = personDAO.getAllPersons();
-        personListAZ = personDAO.getAllPersonsAZ();
-        personListZA = personDAO.getAllPersonsZA();
     }
+
 
     public void insert(Person person)
     {
@@ -36,6 +34,7 @@ public class PersonRepository {
         });
     }
 
+
     public void delete(Person person)
     {
         executorService.execute(new Runnable() {
@@ -45,6 +44,7 @@ public class PersonRepository {
             }
         });
     }
+
 
     public void update(Person person)
     {
@@ -60,13 +60,6 @@ public class PersonRepository {
         return personList;
     }
 
-    public LiveData<List<Person>> getAllPersonsAZ() {
-        return personListAZ;
-    }
-
-    public LiveData<List<Person>> getAllPersonsZA() {
-        return personListZA;
-    }
 
 
 }

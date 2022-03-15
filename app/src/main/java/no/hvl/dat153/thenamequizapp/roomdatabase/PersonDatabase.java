@@ -12,6 +12,8 @@ public abstract class PersonDatabase extends RoomDatabase {
     private static PersonDatabase instance;
     public abstract PersonDAO personDAO();
 
+
+    // Creating a single instance of a DB if it does not exist
     public static synchronized PersonDatabase getInstance(Context context)
     {
         if (instance == null)

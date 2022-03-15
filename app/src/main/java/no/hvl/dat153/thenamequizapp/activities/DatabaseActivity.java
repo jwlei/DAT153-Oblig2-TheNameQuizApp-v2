@@ -107,6 +107,7 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         });
 
+        // Swipe to delete helper
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

@@ -40,11 +40,8 @@ public class DatabaseRemoveTest {
     private PersonDatabase database;
     private PersonDAO personDAO;
 
-    //ActivityTestRule is deprecated but could not get a handle for the application activity
-    //from ActivityScenarioRule.
+
     @Rule
-    //public ActivityScenarioRule<DatabaseActivity> activityScenarioRule
-    //        = new ActivityScenarioRule<>(DatabaseActivity.class);
     public ActivityScenarioRule<DatabaseActivity> activityScenarioRule
             = new ActivityScenarioRule<>(DatabaseActivity.class);
 
@@ -66,6 +63,7 @@ public class DatabaseRemoveTest {
     public void removeInPosition() throws Exception {
         int noPersons = getNoPersonsInDatabase();
 
+        // Scroll to position
         onView(withId(R.id.recyclerView))
                 .perform(actionOnItemAtPosition(0, scrollTo()));
 

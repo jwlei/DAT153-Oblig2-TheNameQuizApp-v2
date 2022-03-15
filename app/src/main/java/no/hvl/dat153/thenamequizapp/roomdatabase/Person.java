@@ -9,9 +9,6 @@ import java.util.Comparator;
 @Entity(tableName = "person")
 public class Person {
 
-    //private String name;
-    //private Uri image;
-
     @PrimaryKey(autoGenerate = true)
     public int person_id;
     public String name;
@@ -22,37 +19,19 @@ public class Person {
         this.image = image;
     }
 
-    public int getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
-    }
-
     public String getName() {
         return name;
     }
+
     public byte[] getImage() {
         return image;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public Uri getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(Uri image) {
-//        this.image = image;
-//    }
-//
     public void setName(String name) {
         this.name = name;
     }
 
+    // ----------- Comparator for AZ ZA sorting -------------
     public static Comparator<Person> PersonNameAZComparator = new Comparator<Person>() {
         @Override
         public int compare(Person person1, Person person2) {

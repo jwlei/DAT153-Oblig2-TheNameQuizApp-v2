@@ -29,8 +29,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         notifyDataSetChanged();
     }
 
+    // Get person in position for swipe to delete test
     public Person getPersonInPosition(int position) {
-
         return personList.get(position);
     }
 
@@ -80,6 +80,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Person
         }
     }
 
+    // ------------ Sort buttons -----------------
     public void sortPersonListAZ() {
         Log.d(TAG, "sortPersonListAZ");
         personList.sort(Person.PersonNameAZComparator);

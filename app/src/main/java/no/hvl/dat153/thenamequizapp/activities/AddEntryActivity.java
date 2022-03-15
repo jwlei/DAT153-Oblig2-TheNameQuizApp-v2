@@ -156,11 +156,12 @@ public class AddEntryActivity extends AppCompatActivity {
                 });
     }
 
-    // For test
+    // Get an image from the resourceFolder for test
     public void getImageFromResource() {
         chosenImage = BitmapFactory.decodeResource(getResources(), R.drawable.finn_arne);
         imageView.setImageBitmap(chosenImage);
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

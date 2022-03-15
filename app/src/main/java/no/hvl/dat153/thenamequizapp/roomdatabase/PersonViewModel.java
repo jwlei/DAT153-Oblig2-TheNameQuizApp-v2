@@ -15,8 +15,6 @@ public class PersonViewModel extends AndroidViewModel {
 
     private final PersonRepository repository;
     private final LiveData<List<Person>> personList;
-    private final LiveData<List<Person>> personListAZ;
-    private final LiveData<List<Person>> personListZA;
 
 
     public PersonViewModel(@NonNull Application application) {
@@ -24,8 +22,6 @@ public class PersonViewModel extends AndroidViewModel {
 
         repository = new PersonRepository(application);
         personList = repository.getAllPersons();
-        personListAZ = repository.getAllPersonsAZ();
-        personListZA = repository.getAllPersonsZA();
     }
 
     public void insert(Person person)
@@ -47,9 +43,5 @@ public class PersonViewModel extends AndroidViewModel {
     {
         return personList;
     }
-
-    public LiveData<List<Person>> getAllPersonsAZ() { return personListAZ; }
-
-    public LiveData<List<Person>> getAllPersonsZA() { return personListZA; }
 
 }

@@ -30,13 +30,9 @@ public class ButtonToActivityTest {
     public void startActivityTest(){
 
         //Click the start quiz button on main activity
-        //onView(withId(R.id.buttonQuiz)).perform(click());
         onView(withId(R.id.buttonQuiz)).perform(click());
 
-        //intended(toPackage("no.hvl.dat153.thenamequizapp.activities.QuizActivity"));
-
         //Check that an element on the quiz activity is displaying, verifying that we have launched the the correct
-        //activity, could also check for intent matching result?
         onView(withId(R.id.radio_btns)).check(matches(isDisplayed()));
     }
 }

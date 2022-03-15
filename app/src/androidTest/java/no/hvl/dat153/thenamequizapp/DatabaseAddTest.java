@@ -48,20 +48,18 @@ public class DatabaseAddTest {
 
     @Before
     public void setupDatabase() {
-        //context = ApplicationProvider.getApplicationContext();
-        //database = Room.inMemoryDatabaseBuilder(context, PersonDatabase.class).build();
         DatabaseActivity databaseActivity = (DatabaseActivity) getInstance();
         database = PersonDatabase.getInstance(databaseActivity);
         personDAO = database.personDAO();
     }
 
-    /*
+    /* Close the DB if test is run seperatly.
     @After
          public void closeDatabase() {
         database.close();
-    }*/
+    }
+    */
 
-    //public ActivityTestRule<DatabaseActivity> mActivityRule = new ActivityTestRule<>(DatabaseActivity.class);
 
     @Test
     public void addNewPersonTest() throws Throwable {
@@ -77,27 +75,23 @@ public class DatabaseAddTest {
         // 2 må kalle på metode for å ordne bilde
         //må få tak i Activity-en
         AddEntryActivity addEntryActivity = (AddEntryActivity) getInstance();
-        //addEntryActivity.getImageFromResource();
 
+
+        // Hent bilde fra resource folder
         runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
-
                 addEntryActivity.getImageFromResource();
-
             }
         });
 
-
+        // Skriv in navn på eksempel person
         onView(withId(R.id.editTextPersonName)).perform(typeText(nameToAdd));
-
 
         // Fjerne tastatur
         Espresso.closeSoftKeyboard();
 
         // 3 Trykke på Add Person
-
         onView(withId(R.id.buttonAddPerson)).perform(click());
 
         // Sjekke at , er tilbake i DatabaseActivity
@@ -109,9 +103,7 @@ public class DatabaseAddTest {
         // forventet, faktisk
         assertEquals(nameToAdd, personToAdd.getName());
 
-        // ta tak i databasen
-
-        // slette entry-en
+        // slette entry-en slik at database ikke endres
         personDAO.Delete(personToAdd);
 
     }

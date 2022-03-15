@@ -18,6 +18,7 @@ public class ResultActivity extends AppCompatActivity {
 
         String score = "";
 
+        // Get the score through bundle extras
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             score = extras.getString("score");
@@ -25,8 +26,10 @@ public class ResultActivity extends AppCompatActivity {
 
         String display = "Score: " +score;
         TextView textView = findViewById(R.id.showResult);
+        // Set the text of textView to showing "Score: " + score
         textView.setText(display);
 
+        // Return to start button
         final Button returnToStart = findViewById(R.id.returnToStartBtn);
         Intent MainActivity = new Intent(this, no.hvl.dat153.thenamequizapp.activities.MainActivity.class);
         returnToStart.setOnClickListener(v -> startActivity(MainActivity));

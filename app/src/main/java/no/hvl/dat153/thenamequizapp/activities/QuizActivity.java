@@ -75,23 +75,22 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
 
         quizImage = findViewById(R.id.guessPicture);
+
         radioGroup = findViewById(R.id.radio_btns);
         radioButtonA = findViewById(R.id.quizAlternative1);
         radioButtonB = findViewById(R.id.quitAlternative2);
         radioButtonC = findViewById(R.id.quizAlternative3);
 
-
-
         submitButton = findViewById(R.id.submitBtn);
         endQuizButton = findViewById(R.id.endQuizBtn);
+
         score = findViewById(R.id.score);
 
         // Get ViewModel handle
         personViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
                 .create(PersonViewModel.class);
 
-
-
+        // If no persons populate
         if (randomPersonsList == null) {
             populateRandomPersonsList();
         }
@@ -126,10 +125,8 @@ public class QuizActivity extends AppCompatActivity {
                         displayScore = "Score: " +correctAnswers;
                         score.setText(displayScore);
                         radioGroup.clearCheck();
-
                     }
                 }
-
                 newQuestion();
             }
         });
@@ -149,6 +146,7 @@ public class QuizActivity extends AppCompatActivity {
 
         Log.d(TAG, "oncreate_end");
     }
+
 
     private void populateRandomPersonsList() {
 
@@ -173,6 +171,7 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
+
     private void newQuestion() {
         Log.d(TAG, "newQuestion()");
         Log.d(TAG, "noQuestions: " +noQuestion);
@@ -182,59 +181,50 @@ public class QuizActivity extends AppCompatActivity {
             return;
         }
 
+        //Getting the person intended to be the answer.
         correctPerson = randomPersonsList.get(noQuestion);
         correctAnswer = correctPerson.getName();
 
+        //Set the image to be guessed as the image for the quiz question
         quizImage.setImageBitmap(
         BitmapFactory.decodeByteArray(
                 correctPerson.getImage()
                 ,0
                 ,correctPerson.getImage().length));
 
+        // Create a list of persons
         List<Integer> shuffledIndices = new ArrayList<>();
         for (Person person : randomPersonsList) {
             if (randomPersonsList.indexOf(person) != noQuestion) {
                 shuffledIndices.add(randomPersonsList.indexOf(person));
             }
         }
+        // Shuffle the indices
         Collections.shuffle(shuffledIndices);
 
         Log.d(TAG, "shuffledIndices[0] = " + shuffledIndices.get(0) + " shuffledIndices[1] = " + shuffledIndices.get(1));
 
         mixChoices.clear();
+
+        // Add the persons with shuffled indices to the "mixChoices" list.
         mixChoices.add(correctPerson);
         mixChoices.add(randomPersonsList.get(shuffledIndices.get(0)));
         mixChoices.add(randomPersonsList.get(shuffledIndices.get(1)));
 
-
         allOptionsList = new ArrayList<>();
 
-
+        // Add the question answer alternatives to allOptions
         allOptionsList.addAll(mixChoices);
-        buttonIds.addAll(mixChoices);
 
+        // Set each button to display an answer alternative
         radioButtonA.setText(allOptionsList.get(0).getName());
         radioButtonB.setText(allOptionsList.get(1).getName());
         radioButtonC.setText(allOptionsList.get(2).getName());
 
-
-
         noQuestion = (noQuestion == randomPersonsList.size()) ? (noQuestion = randomPersonsList.size()) : (noQuestion = noQuestion+1);
     }
 
-
-    // WIP getting id of correct button
-    public static int getCorrectAns(){
-
-        if (allOptionsList.get(0).equals(correctAnswer)){
-            return radioButtonA.getId();
-
-        } else if (allOptionsList.get(1).equals(correctAnswer)) {
-            return radioButtonB.getId();
-
-        } else return radioButtonC.getId();
-    }
-
+    // Get the correct answer for espresso test
     public Person getCorrectPerson() {
         return correctPerson;
     }

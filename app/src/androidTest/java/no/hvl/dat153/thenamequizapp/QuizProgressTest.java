@@ -63,23 +63,18 @@ public class QuizProgressTest {
         // velg radiobutton med tekst som er lik riktig person sitt navn
         RadioGroup radioGroup = quizActivity.getRadioGroup();
 
-        //onView(withId(R.id.quizAlternative1).matches(withText(correctName))).perform()
-
+        // Try each of the buttons to check if the answer text matches the correct name
         try {
             onView(withId(R.id.quizAlternative1)).check(matches(withText(correctName))).perform(click());
-        } catch (AssertionFailedError e) {
-        }
+        } catch (AssertionFailedError e) {}
 
         try {
             onView(withId(R.id.quitAlternative2)).check(matches(withText(correctName))).perform(click());
-        } catch (AssertionFailedError e) {
-
-        }
+        } catch (AssertionFailedError e) {}
 
         try {
             onView(withId(R.id.quizAlternative3)).check(matches(withText(correctName))).perform(click());
-        } catch (AssertionFailedError e) {
-        }
+        } catch (AssertionFailedError e) {}
 
         // Click on submit
         onView(withId(R.id.submitBtn)).perform(click());
@@ -101,23 +96,14 @@ public class QuizProgressTest {
         Person correctPerson = quizActivityWrong.getCorrectPerson();
         String correctName = correctPerson.getName();
 
-
-        // velg radiobutton med tekst som er lik riktig person sitt navn
-        RadioGroup radioGroup = quizActivityWrong.getRadioGroup();
-
-        //onView(withId(R.id.quizAlternative1).matches(withText(correctName))).perform()
-
         // click the wrong answer and get 0 in score
         try {
             onView(withId(R.id.quizAlternative1)).check(matches(not(withText(correctName))));
-        } catch (AssertionFailedError e) {
-        }
+        } catch (AssertionFailedError e) {}
 
         try {
             onView(withId(R.id.quitAlternative2)).check(matches(not(withText(correctName))));
-        } catch (AssertionFailedError e) {
-
-        }
+        } catch (AssertionFailedError e) {}
 
 
         // Click on submit
@@ -125,18 +111,17 @@ public class QuizProgressTest {
 
         onView(withId(R.id.endQuizBtn)).perform(click());
 
+        // Assert that score is 0 since we pressed the wrong answer
         onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));
-
-        // assert at score = score+1
     }
 
     @Test
     public void noQuestions() {
         onView(withId(R.id.endQuizBtn)).perform(click());
-
         onView(withId(R.id.showResult)).check(matches(withText("Score: 0")));
     }
 
+    // Getting the instance of the quiz
     private Activity getInstance() {
         final Activity[] currentActivity = {null};
         getInstrumentation().runOnMainSync(new Runnable() {
